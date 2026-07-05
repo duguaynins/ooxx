@@ -63,6 +63,27 @@
         }
     </style-->
     <style>
+@keyframes hardFlashRed {
+  0% {
+    background: transparent;
+    box-shadow: none;
+  }
+  50% {
+    background: rgba(255, 0, 0, 0.9);
+    box-shadow: 0 0 20px red;
+  }
+  100% {
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+.flash {
+  animation: hardFlashRed 0.4s infinite;
+}
+.hidden {
+  display: none;
+}
     </style>
   
 <style></style>
@@ -91,8 +112,8 @@
       max-width: none;
     ">
           <strong id="anything" style="background-color: white; color: black; font-size: max(1vh,1vw); border-bottom: 4px double black; padding: 8px;"><b translate="no">© nins. </b>Check a link's destination here first, and don't walk straight through the door into trouble.</strong>
-          <div id="title" class="nes-text is-primary" style="border-bottom: 4px solid black; padding: 8px; font-size: 2em;" translate="no">
-          <div onclick="this.style.display='none'">
+          <div id="title" class="nes-text is-primary flash" style="border-bottom: 4px solid black; padding: 8px; font-size: 2em;" translate="no">
+          <div onclick="this.classList.toggle('hidden')">
           nins/ooxx
           </div></div>
           
@@ -155,8 +176,8 @@
 
 <!-- 放置你原有的布局 -->
             
-          <div id="notice" class="nes-text is-warning" style="border-top: 4px solid black; padding: 8px;" translate="yes">
-          <div onclick="this.style.display='none'">
+          <div id="notice" class="nes-text is-warning flash" style="border-top: 4px solid black; padding: 8px;" translate="yes">
+          <div onclick="this.classList.toggle('hidden')">
           By sending a message to this service, it means you have agreed to any content and all content!
           </div></div>
           <strong id="copyright" style="background-color: white; color: black; font-size: max(1vh,1vw); border-top: 4px solid black; padding: 8px;" translate="no">© 2024 NINS (by JPGT).</strong>
@@ -758,7 +779,12 @@ async function fetchRdapJson(url) {
       UserReady();
       // 這裡放你的邏輯
     }
-  }, { once: true });
+  }, { once: true });/*
+  ///20260705
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("notice").style.display = "block";
+    document.getElementById("title").style.display = "block";
+  });*/
 </script>
     
 </body>
