@@ -291,13 +291,64 @@ function recheck(url) {
     }
 }
 
+function normalize(input) {
+  input = input.trim();
+  if (!input) return "";
+  if (!/^https?:\/\//i.test(input)) {
+    input = "https://" + input;
+  }
+  try {
+    const url = new URL(input);
+    url.hostname = url.hostname.toLowerCase();
+    url.protocol = url.protocol.toLowerCase();
+    url.hash = "";
+    if ((url.protocol === "http:" && url.port === "80") ||
+        (url.protocol === "https:" && url.port === "443")) {
+      url.port = "";
+    }
+    return url.toString();
+  } catch(e) {
+    return null;
+  }
+}
+
 async function send() {
+
+  const qrText = document.getElementById("input_msg").value;
+  const normalized = normalize(qrText);
+  if (normalized) {
+    ///stopScanning();
+    
+    const urlObj = new URL(normalized);
+    const hostname = urlObj.hostname;
+    ///qrlBefore.textContent = normalized;
+    ///qrlAfter.textContent = hostname;
+    ///stopScanning();
+
+    ///const target = "google.com";
+    const parts = hostname.toLowerCase().split(".");
+
+    const last = parts.at(-1);      // 倒數第一
+    const second = parts.at(-2);    // 倒數第二
+
+    console.log(last, second);
+
+    if (last === "gov" || second === "gov") {window.open(normalized, "_blank", "noopener,noreferrer");}
+    else if (last === "edu" || second === "edu") {window.open(normalized, "_blank", "noopener,noreferrer");}
+    else {}
+    ///qrlStatus.style.color = "white";
+    ///stopScanning();
+  } else {
+  }
+
+  
     ///document.getElementById("input_qr").disabled = true;
     ///document.getElementById("input_msg").disabled = true;
     ///stopFlag = true;
     document.getElementById("input_msg").value =  document.getElementById("input_msg").value.trim();
     document.getElementById("content").innerHTML = "Waiting for decoding...";
     document.getElementById("content").innerHTML = "Select whose report soon...";  ///Google will provide the analysis report soon.
+    document.getElementById("content").innerHTML = "We are about to hand it over to AI for processing, as long as the URL is for a non-governmental or non-educational domain.";  ///Google will provide the analysis report soon.
 
     const url = document.getElementById("input_msg").value;
     console.log("RAW:", JSON.stringify(url));
