@@ -334,14 +334,15 @@ function normalize(input) {
 }
 
 async function send() {
-
+/*
   const qrText = document.getElementById("input_msg").value;
   const normalized = normalize(qrText);
   if (normalized) {
     ///stopScanning();
     
-    const urlObj = new URL(normalized);
-    const hostname = urlObj.hostname;
+    const obj = new URL(normalized);
+    const hostname = obj.hostname;
+    ///if (!["https:", "http:"].includes(obj.protocol)) return;
     ///qrlBefore.textContent = normalized;
     ///qrlAfter.textContent = hostname;
     ///stopScanning();
@@ -350,17 +351,17 @@ async function send() {
     const parts = hostname.toLowerCase().split(".");
 
     const last = parts.at(-1);      // 倒數第一
-    const second = parts.at(-2);    // 倒數第二
+    ///const second = parts.at(-2);    // 倒數第二
 
-    console.log(last, second);
+    ///console.log(last, second);
 
-    if (last === "gov" || second === "gov") {window.open(normalized, "_blank", "noopener,noreferrer");}
-    else if (last === "edu" || second === "edu") {window.open(normalized, "_blank", "noopener,noreferrer");}
+    if (last === "gov" || last === "edu") {window.open(normalized, "_blank", "noopener,noreferrer");}
+    ///else if (second === "gov" || second === "edu") {window.open(normalized, "_blank", "noopener,noreferrer");}
     else {}
     ///qrlStatus.style.color = "white";
     ///stopScanning();
   } else {
-  }
+  }*/
 
   
     ///document.getElementById("input_qr").disabled = true;
