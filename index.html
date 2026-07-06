@@ -196,6 +196,44 @@
 <!-- HTML ================================================== -->
     
 <!-- 放置你原有的布局 -->
+    
+<script>
+const ok = confirm("By sending a message to this service, it means you have agreed to any content and all content!");  
+
+if (ok) {
+  console.log("START");
+} else {
+  createFullScreenBlock();
+}
+
+// 👇 產生全螢幕遮罩
+function createFullScreenBlock() {
+  const mask = document.createElement("div");
+
+  mask.style.position = "fixed";
+  mask.style.inset = "0";
+  mask.style.zIndex = "999999";
+  mask.style.background = "rgba(0,0,0,0.9)";
+  mask.style.display = "flex";
+  mask.style.alignItems = "center";
+  mask.style.justifyContent = "center";
+  mask.style.color = "#fff";
+  mask.style.fontSize = "20px";
+  mask.style.fontFamily = "monospace";
+
+  mask.innerHTML = `
+    <div style="text-align:center">
+      <p>!!!</p>
+    </div>
+  `;
+
+  document.body.appendChild(mask);
+
+  // 可選：禁止滾動
+  document.body.style.overflow = "hidden";
+}
+</script>
+    
 <script>
 const urls = [
   "https://",
