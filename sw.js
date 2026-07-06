@@ -7,6 +7,10 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  event.respondWith(fetch(event.request));
+});
+/*
+self.addEventListener('fetch', event => {
   event.respondWith(
     (async () => {
       const cached = await caches.match(event.request);
@@ -25,4 +29,4 @@ self.addEventListener('fetch', event => {
       }
     })()
   );
-});
+});*/
